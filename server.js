@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const response = require('./network/response')
 const router = express.Router();
 
 var app = express();
@@ -8,20 +9,16 @@ app.use(bodyParser.json());
 app.use(router);
 
 router.get('/message', function(req, res){
-    res.header({
-        "custom-header": "holix baby"
-    })
-    console.log(req.headers["custom-header"])
-    res.send('Lista de mensajes')
+    response.success(req, res, 'tareas obtenidas',200)
 })
 
 router.post('/message', function(req,res){
     console.log(req.query)
-    console.log(req.body)
-    // respuestas 
-    res.status(201).send([{error: '', message: 'El mensaje se ha añadido correctamente'},{objeto:'segundo objeto'}])
-    // respuesta simple
-    res.send('El mensaje ha sido añadido')
+    if(req.query.error == "ok"){
+        response.error(req, res, 'algo ha sucedido al crear la tarea', 400)
+    }else {
+        response.success(req, res, 'tarea creada correctamente',201)
+    }
 })
 
 app.listen(3000);
