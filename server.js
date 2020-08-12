@@ -18,6 +18,9 @@ router.get('/message', function(req, res){
 router.post('/message', function(req,res){
     console.log(req.query)
     console.log(req.body)
+    // respuestas 
+    res.status(201).send([{error: '', message: 'El mensaje se ha añadido correctamente'},{objeto:'segundo objeto'}])
+    // respuesta simple
     res.send('El mensaje ha sido añadido')
 })
 
