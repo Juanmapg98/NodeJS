@@ -20,6 +20,9 @@ router.post('/message', function(req,res){
         response.success(req, res, 'tarea creada correctamente',201)
     }
 })
+// servidor de archivos estaticos
+
+app.use('/app', express.static('public'));
 
 app.listen(3000);
 console.log('la aplicacion esta escuchando en http://localhost:3000')
