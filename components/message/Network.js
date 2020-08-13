@@ -3,7 +3,13 @@ const response = require('../../network/response')
 const controller = require('./Controller')
 const router = express.Router();
 router.get('/', function (req, res) {
-    response.success(req, res, 'tareas obtenidas', 200)
+    controller.getMessages()
+        .then((messageList) => {
+            response.success(req,res,messageList, 200)
+        })
+        .catch(e => {
+            response.error(req,res, 'unexpected error', 500, e)
+        })
 })
 
 router.post('/', function (req, res) {
