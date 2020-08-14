@@ -1,7 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const router = require('./network/Routes')
+const db = require('./db')
+const router = require('./network/Routes');
 
+
+db("mongodb://user:25285789@cluster0-shard-00-00.hochh.mongodb.net:27017,cluster0-shard-00-01.hochh.mongodb.net:27017,cluster0-shard-00-02.hochh.mongodb.net:27017/<telegram>?ssl=true&replicaSet=atlas-lnnmdu-shard-0&authSource=admin&retryWrites=true&w=majority")
 var app = express();
 app.use(bodyParser.json());
 // app.use(router)
