@@ -1,4 +1,5 @@
-const store = require('./store')
+const store = require('./store');
+const { response } = require('express');
 
 function addMessage(user,message){
     return new Promise((resolve,reject) =>{
@@ -23,7 +24,19 @@ function getMessages(){
         resolve(store.list());
     }) 
 }
+
+function updateMessage(id, message){
+    return new Promise(async(resolve, reject) => {
+        if(!id || !message){
+            reject('invalid data')
+            return false;
+        }
+       const result = await store.updateText(id, message)
+       resolve(result);
+    })
+}
 module.exports = {
     addMessage,
-    getMessages
+    getMessages,
+    updateMessage
 };
